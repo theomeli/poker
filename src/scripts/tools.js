@@ -1,4 +1,4 @@
-import _ from lodash;
+import _ from "lodash";
 
 /**
  *
@@ -23,7 +23,7 @@ function isFiveStraightFunc(cardRanks) {
  */
 function convertAsus(cards, cardRanks) {
   cards
-    .filter(c => c.rank == 14)
+    .filter(c => c.rank === 14)
     .map(c => {
       c.rank = 1;
       return c;
@@ -41,7 +41,7 @@ function isStraightFunc(cards) {
     const cardA = cards[i].rank;
     const cardB = cards[i + 1].rank;
 
-    if (cardA - cardB > 1 || cardA - cardB == 0) {
+    if (cardA - cardB > 1 || cardA - cardB === 0) {
       return false;
     }
   }
@@ -57,7 +57,7 @@ function checkSameSuit(cards, cardRanks, isStraight) {
     };
   }
 
-  if (cards[0].rank == 14) {
+  if (cards[0].rank === 14) {
     return { verbal: "Royal Flush", rating: [10] };
   } else {
     return {
@@ -68,15 +68,15 @@ function checkSameSuit(cards, cardRanks, isStraight) {
 }
 
 function checkFourMax(countEntries, maxCount) {
-  if (maxCount == 4) {
-    const card = countEntries.filter(c => c[1] == 4)[0][0];
+  if (maxCount === 4) {
+    const card = countEntries.filter(c => c[1] === 4)[0][0];
 
     return {
       verbal: `Four of a Kind of ${card}`,
       rating: [8, Number(card)]
     };
   } else {
-    const card = countEntries.filter(c => c[1] == 3)[0][0];
+    const card = countEntries.filter(c => c[1] === 3)[0][0];
 
     return {
       verbal: `Full House of ${card}`,
@@ -86,8 +86,8 @@ function checkFourMax(countEntries, maxCount) {
 }
 
 function checkThreeMax(countEntries, maxCount) {
-  if (maxCount == 3) {
-    const card = countEntries.filter(c => c[1] == 3)[0][0];
+  if (maxCount === 3) {
+    const card = countEntries.filter(c => c[1] === 3)[0][0];
 
     return {
       verbal: `Three of a Kind of ${card}`,
@@ -95,10 +95,10 @@ function checkThreeMax(countEntries, maxCount) {
     };
   } else {
     let cards = countEntries
-      .filter(c => c[1] == 2)
+      .filter(c => c[1] === 2)
       .sort((a, b) => b[0] - a[0])
       .map(c => Number(c[0]));
-    cards.push(Number(countEntries.filter(c => c[1] == 1)[0][0]));
+    cards.push(Number(countEntries.filter(c => c[1] === 1)[0][0]));
 
     return {
       verbal: `Two Pairs of ${cards[0]} and ${cards[1]} with ${cards[2]}`,
@@ -108,9 +108,9 @@ function checkThreeMax(countEntries, maxCount) {
 }
 
 function getFourRanks(countEntries) {
-  const card = countEntries.filter(c => c[1] == 2)[0][0];
+  const card = countEntries.filter(c => c[1] === 2)[0][0];
   const cards = countEntries
-    .filter(c => c[1] == 1)
+    .filter(c => c[1] === 1)
     .sort((a, b) => b[0] - a[0])
     .map(c => Number(c[0]));
 
@@ -183,7 +183,6 @@ function getRating(cards) {
   }
 }
 
-////////////////////////////////////////////////////
 const deepFreeze = object => {
   if (typeof object !== "object") {
     return object;
@@ -211,7 +210,7 @@ const Cards = Ranks.reduce((accum, rank) => {
 const RandomCards = deepFreeze(Cards.sort(() => 0.5 - Math.random()));
 
 const maxInOrder = weights =>
-  lodash._.chain(cards)
+  _.chain(weights)
     .sortBy("rank")
     .uniq()
     .map((num, i) => num - i)
@@ -220,15 +219,17 @@ const maxInOrder = weights =>
     .last()
     .value().length;
 
-module.exports.getRating = getRating;
-module.exports.isFiveStraightFunc = isFiveStraightFunc;
-module.exports.convertAsus = convertAsus;
-module.exports.isStraightFunc = isStraightFunc;
-module.exports.checkSameSuit = checkSameSuit;
-module.exports.checkFourMax = checkFourMax;
-module.exports.checkThreeMax = checkThreeMax;
-module.exports.getFourRanks = getFourRanks;
-module.exports.deepFreeze = deepFreeze;
-module.exports.Cards = Cards;
-module.exports.RandomCards = RandomCards;
-module.exports.maxInOrder = maxInOrder;
+export {
+  RandomCards,
+  getRating,
+  isFiveStraightFunc,
+  convertAsus,
+  isStraightFunc,
+  checkSameSuit,
+  checkFourMax,
+  checkThreeMax,
+  getFourRanks,
+  deepFreeze,
+  Cards,
+  maxInOrder
+};
