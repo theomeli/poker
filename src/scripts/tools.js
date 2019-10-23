@@ -219,6 +219,16 @@ const maxInOrder = weights =>
     .last()
     .value().length;
 
+class RateableCards {
+  constructor(cards) {
+    this.ranks = _.groupBy(cards, "rank");
+    this.suits = _.groupBy(cards, "suit");
+    this.rankTimes = _.groupBy(this.ranks, "length");
+    this.suitTimes = _.groupBy(this.suits, "length");
+    this.maxInOrder = maxInOrder(cards.map(({ rank }) => rank));
+  }
+}
+
 export {
   RandomCards,
   getRating,
@@ -231,5 +241,6 @@ export {
   getFourRanks,
   deepFreeze,
   Cards,
-  maxInOrder
+  maxInOrder,
+  RateableCards
 };

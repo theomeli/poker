@@ -11,7 +11,8 @@ import {
   getFourRanks,
   deepFreeze,
   Cards,
-  maxInOrder
+  maxInOrder,
+  RateableCards
 } from "../scripts/tools";
 
 test("Test for Royal Flush", () => {
@@ -385,4 +386,39 @@ test("Check RandomCards length", () => {
 test("Check maxInOrder with a hand", () => {
   var result = maxInOrder([1, 4, 5, 6, 8]);
   expect(result).toEqual(3);
+});
+
+test("Check RateableCards constructor", () => {
+  const cards = [
+    { suit: "clubs", rank: 6 },
+    { suit: "clubs", rank: 4 },
+    { suit: "clubs", rank: 3 },
+    { suit: "spades", rank: 4 },
+    { suit: "diamonds", rank: 8 }
+  ];
+  const rateableCards = new RateableCards(cards);
+  expect(rateableCards.ranks).toEqual({
+    6: [{ suit: "clubs", rank: 6 }],
+    4: [{ suit: "clubs", rank: 4 }, { suit: "spades", rank: 4 }],
+    3: [{ suit: "clubs", rank: 3 }],
+    8: [{ suit: "diamonds", rank: 8 }]
+  });
+  expect(rateableCards.suits).toEqual({
+    clubs: [
+      { suit: "clubs", rank: 6 },
+      { suit: "clubs", rank: 4 },
+      { suit: "clubs", rank: 3 }
+    ],
+    spades: [{ suit: "spades", rank: 4 }],
+    diamonds: [{ suit: "diamonds", rank: 8 }]
+  });
+  expect(rateableCards.rankTimes).toEqual({
+    1: [
+      [{ suit: "clubs", rank: 3 }],
+      [{ suit: "clubs", rank: 6 }],
+      [{ suit: "diamonds", rank: 8 }]
+    ],
+    2: [[{ suit: "clubs", rank: 4 }, { suit: "spades", rank: 4 }]]
+  });
+  expect(rateableCards.suitTimes).toEqual({});
 });
