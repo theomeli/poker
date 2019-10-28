@@ -7,7 +7,7 @@ import {
   checkFourMax,
   checkThreeMax,
   getFourRanks
-} from "../scripts/toolsOld";
+} from "../scripts/cardsRatingOld";
 
 test("Test for Royal Flush", () => {
   const rating = getRating([

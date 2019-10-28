@@ -1,6 +1,10 @@
 import {
   RandomCards,
   deepFreeze,
+  Suits,
+  SuitMapping,
+  Ranks,
+  RankMapping,
   Cards,
   maxInOrder,
   RateableCards,
@@ -24,12 +28,22 @@ test("Check deepFreeze funtion for a custom object 2", () => {
   expect(t).toThrow(TypeError);
 });
 
-test("Check deepFreeze funtion for an array", () => {
+test("Check deepFreeze function for an array", () => {
   var result = deepFreeze([1, 2, 3]);
   const t = () => {
     result[0] = 2;
   };
   expect(t).toThrow(TypeError);
+});
+
+test("Check SuitMapping", () => {
+  const result = SuitMapping[Suits[0]];
+  expect(result).toEqual("S");
+});
+
+test("Check RankMapping", () => {
+  const result = RankMapping[Ranks[12]];
+  expect(result).toEqual("A");
 });
 
 test("Check Cards type", () => {

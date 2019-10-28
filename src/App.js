@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { RandomCards } from "./scripts/tools";
+import { RandomCards } from "./scripts/cardsRating";
 
 function App() {
   return (

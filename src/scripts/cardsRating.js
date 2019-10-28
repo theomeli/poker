@@ -16,7 +16,30 @@ const deepFreeze = object => {
 
 const Suits = Object.freeze(["Spades", "Hearts", "Diamonds", "Clubs"]);
 
+const SuitMapping = Object.freeze({
+  Spades: "S",
+  Hearts: "H",
+  Diamonds: "D",
+  Clubs: "C"
+});
+
 const Ranks = Object.freeze([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
+
+const RankMapping = Object.freeze({
+  2: 2,
+  3: "3",
+  4: "4",
+  5: "5",
+  6: "6",
+  7: "7",
+  8: "8",
+  9: "9",
+  10: "10",
+  11: "J",
+  12: "Q",
+  13: "K",
+  14: "A"
+});
 
 const Cards = Ranks.reduce((accum, rank) => {
   return [...accum, ...Suits.map(suit => ({ rank, suit }))];
@@ -98,6 +121,10 @@ const PokerHandRate = hand =>
 export {
   RandomCards,
   deepFreeze,
+  Suits,
+  SuitMapping,
+  Ranks,
+  RankMapping,
   Cards,
   maxInOrder,
   RateableCards,
