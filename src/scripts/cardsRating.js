@@ -14,7 +14,7 @@ const deepFreeze = object => {
   return object;
 };
 
-const Suits = Object.freeze(["Spades", "Hearts", "Diamonds", "Clubs"]);
+const Suits = Object.freeze(["♠︎", "♥︎", "♦︎", "♣︎"]);
 
 const SuitMapping = Object.freeze({
   Spades: "S",
@@ -69,7 +69,7 @@ class RateableCards {
     return !!this.ranks[14];
   }
   hasInARow(n) {
-    return this.maxInOrder == n;
+    return this.maxInOrder === n;
   }
   getNSameRanks(n) {
     return this.rankTimes[n] || [];
@@ -81,7 +81,7 @@ class RateableCards {
     return (this.suitTimes[n] || []).length;
   }
   hasMaxInOrder(n) {
-    return this.maxInOrder == n;
+    return this.maxInOrder === n;
   }
   getWorstSingleRank() {
     return _.chain(this.getNSameRanks(1))
@@ -100,7 +100,7 @@ const PokerRating = {
     (!!hand.hasMaxInOrder(5) ||
       (hand.hasAnAce() &&
         hand.hasMaxInOrder(4) &&
-        hand.getWorstSingleRank() == 2)),
+        hand.getWorstSingleRank() === 2)),
   FourOfAKind: hand => !!hand.hasNSameRanks(4),
   FullHouse: hand => !!hand.hasNSameRanks(3) && !!hand.hasNSameRanks(2),
   Flush: hand => !!hand.hasNSameSuits(5),
@@ -108,11 +108,11 @@ const PokerRating = {
     !!hand.hasMaxInOrder(5) ||
     (hand.hasAnAce &&
       !!hand.hasMaxInOrder(4) &&
-      hand.getWorstSingleRank() == 2),
+      hand.getWorstSingleRank() === 2),
   ThreeOfAKind: hand => !!hand.hasNSameRanks(3),
-  TwoPairs: hand => hand.hasNSameRanks(2) == 2,
+  TwoPairs: hand => hand.hasNSameRanks(2) === 2,
   OnePair: hand => !!hand.hasNSameRanks(2),
-  HighCard: hand => hand.hasNSameRanks(1) == 5
+  HighCard: hand => hand.hasNSameRanks(1) === 5
 };
 
 const PokerHandRate = hand =>
