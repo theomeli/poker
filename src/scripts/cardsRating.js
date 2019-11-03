@@ -26,7 +26,7 @@ const SuitMapping = Object.freeze({
 const Ranks = Object.freeze([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
 
 const RankMapping = Object.freeze({
-  2: 2,
+  2: "2",
   3: "3",
   4: "4",
   5: "5",
@@ -83,6 +83,10 @@ class RateableCards {
   hasMaxInOrder(n) {
     return this.maxInOrder === n;
   }
+  // TODO: test it
+  hasStraightOfFive() {
+    return this.hasAnAce() && this.getWorstSingleRank() === 2;
+  }
   getWorstSingleRank() {
     return _.chain(this.getNSameRanks(1))
       .flatten()
@@ -98,17 +102,13 @@ const PokerRating = {
   StraightFlush: hand =>
     !!hand.hasNSameSuits(5) &&
     (!!hand.hasMaxInOrder(5) ||
-      (hand.hasAnAce() &&
-        hand.hasMaxInOrder(4) &&
-        hand.getWorstSingleRank() === 2)),
+      (hand.hasStraightOfFive() && hand.hasMaxInOrder(4))),
   FourOfAKind: hand => !!hand.hasNSameRanks(4),
   FullHouse: hand => !!hand.hasNSameRanks(3) && !!hand.hasNSameRanks(2),
   Flush: hand => !!hand.hasNSameSuits(5),
   Straight: hand =>
     !!hand.hasMaxInOrder(5) ||
-    (hand.hasAnAce &&
-      !!hand.hasMaxInOrder(4) &&
-      hand.getWorstSingleRank() === 2),
+    (hand.hasStraightOfFive() && !!hand.hasMaxInOrder(4)),
   ThreeOfAKind: hand => !!hand.hasNSameRanks(3),
   TwoPairs: hand => hand.hasNSameRanks(2) === 2,
   OnePair: hand => !!hand.hasNSameRanks(2),

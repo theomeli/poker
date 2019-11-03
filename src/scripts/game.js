@@ -9,7 +9,8 @@ const getCards = (cards, n) => {
   var handCards = cards.slice(0, 3);
   handCards = deepFreeze(
     handCards.map(c => {
-      return { rank: RankMapping[c.rank], suit: SuitMapping[c.suit] };
+      // return { rank: RankMapping[c.rank], suit: SuitMapping[c.suit] };
+      return { rank: RankMapping[c.rank], suit: c.suit };
     })
   );
   const restOfTheCards = cards.slice(3);

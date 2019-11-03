@@ -38,7 +38,8 @@ test("Check deepFreeze function for an array", () => {
 
 test("Check SuitMapping", () => {
   const result = SuitMapping[Suits[0]];
-  expect(result).toEqual("S");
+  console.log(result);
+  expect(result).toEqual("︎︎♣︎");
 });
 
 test("Check RankMapping", () => {
