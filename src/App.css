@@ -73,6 +73,12 @@ img {
   display: inline;
 }
 
-/* .decision {
+.decision {
+  margin-left: 10%;
+}
+
+.submit {
+  display: block;
+  margin-top: 3%;
   margin-left: 20%;
-} */
+}

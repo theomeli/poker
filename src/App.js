@@ -1,10 +1,7 @@
 import React from "react";
-// import { from } from "animationframes";
-import AnimationFrames from "animationframes";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import logo from "./logo.svg";
 import "./App.css";
-// import { RandomCards } from "./scripts/cardsRating";
 import { Deck } from "./Deck";
 
 // const translate = (el, x, y) =>
@@ -38,7 +35,6 @@ import { Deck } from "./Deck";
 function App() {
   return (
     <div>
-      {/* {hello} */}
       <Deck />
     </div>
   );
