@@ -31,8 +31,6 @@ function Card(props) {
     );
   }
 
-  console.log(back);
-
   return (
     <div className={colorClass}>
       <img src={back} alt="A Card" />

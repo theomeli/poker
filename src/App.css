@@ -32,7 +32,8 @@ body {
 
 .card-corner-rank,
 .card-corner-suit {
-  width: 1em;
+  font-size: 0.8em;
+  width: 1.2em;
   text-align: center;
   transform: translate(-50%, 0);
 }
@@ -81,4 +82,9 @@ img {
   display: block;
   margin-top: 3%;
   margin-left: 20%;
+}
+
+.input-raise {
+  padding-left: 20px;
+  display: flex;
 }

@@ -118,6 +118,8 @@ const PokerRating = {
 const PokerHandRate = hand =>
   Object.entries(PokerRating).find(([, is]) => is(hand))[0];
 
+// TODO: use export default
+
 export {
   RandomCards,
   deepFreeze,

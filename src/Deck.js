@@ -1,99 +1,112 @@
 import { Card } from "./Card";
 import { Cards } from "./scripts/cardsRating";
-import { myHand, opponentHand, cards } from "./scripts/game";
+import { myHand, opponentHand, cards, appendOneCard } from "./scripts/game";
 
-import { ButtonGroup, Button } from "react-bootstrap";
+import {
+  ToggleButtonGroup,
+  ToggleButton,
+  Button,
+  ButtonToolbar,
+  Form,
+  FormControl,
+  InputGroup,
+  Alert
+} from "react-bootstrap";
 
-import React from "react";
+import React, { useState } from "react";
 
-// function RandomCards(props) {
-//   return Cards.map(card => <Card card={card} isClosed={true} />);
-// }
+const Deck = () => {
+  const [started, setStarted] = useState(false);
 
-class Deck extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      started: false,
-      fold: false,
-      call: false,
-      raise: false
-    };
-    this.handleStart = this.handleStart.bind(this);
-  }
-  handleStart() {
-    this.setState({ started: true });
-  }
-  render() {
-    var oppHandComp = opponentHand.map(card => (
-      <Card card={card} isClosed={true} />
-    ));
-    var myHandComp = myHand.map(card => <Card card={card} isClosed={false} />);
+  const [selectedButton, setButton] = useState(2);
 
-    const raiseButton = <Button variant="secondary">Raise</Button>;
+  const oppHandComp = opponentHand.map(card => (
+    <Card card={card} isClosed={true} />
+  ));
+  const myHandComp = myHand.map(card => <Card card={card} isClosed={false} />);
 
-    console.log(raiseButton.props.active);
+  const handleChangebutton = e => {
+    setButton(e.target.getAttribute("value"));
+  };
 
-    const counter = raiseButton.props.active ? (
-      <div>
-        <Button variant="secondary">-</Button>
-        <input></input>
-        <Button variant="secondary">+</Button>
+  const counter =
+    selectedButton === "3" ? (
+      <div className="input-raise">
+        {/* <Button variant="secondary">-</Button> */}
+        <InputGroup className="mb-1">
+          <InputGroup.Prepend>
+            <InputGroup.Text>$</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl aria-label="Amount (to the nearest dollar)" />
+          <InputGroup.Append>
+            <InputGroup.Text>.00</InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
+        {/* <Button variant="secondary">+</Button> */}
       </div>
     ) : null;
 
-    var cards = this.state.started ? (
-      // <RandomCards />
-      <div>
-        <div className="opponent-hand">{oppHandComp}</div>
-        <div className="my-hand">
-          {myHandComp}
-          {/* <form className="decision">
-            <label>
-              <input
-                type="checkbox"
-                name="fold"
-                value={this.state.fold}
-                onClick={this.handleCheckbox}
-              />
-              Fold
-              Fold
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="call"
-                value={this.state.call}
-                onClick={this.handleCheckbox}
-              />
-              Call
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="raise"
-                value={this.state.raise}
-                onClick={this.handleCheckbox}
-              />
-              Raise
-            </label>
-          </form> */}
-          <ButtonGroup aria-label="Basic example" className="decision">
-            <Button variant="secondary">Fold</Button>
-            <Button variant="secondary">Call</Button>
-            {raiseButton}
-            {counter}
-          </ButtonGroup>
-          <Button className="submit">Submit</Button>
-          {/* InputGroup bootstrap */}
-        </div>
-      </div>
-    ) : (
-      <button onClick={this.handleStart}>Start</button>
-    );
+  // redux in app.js
+  //dispatch in game.js for changing the cards
 
-    return <React.Fragment>{cards}</React.Fragment>;
-  }
-}
+  var toggleButton = (value, text) => (
+    <ToggleButton
+      variant="secondary"
+      value={value}
+      onClick={handleChangebutton}
+    >
+      {text}
+    </ToggleButton>
+  );
+
+  const [submitted, setSubmitted] = useState(false);
+  const [variant, setVariant] = useState("");
+  const [alertText, setAlertText] = useState("");
+
+  console.log(selectedButton);
+
+  const handleSubmit = e => {
+    setSubmitted(true);
+    if (selectedButton === "1") {
+      setVariant("danger");
+      setAlertText("You have selected Fold. You lost your money");
+    } else if (selectedButton === "2") {
+      console.log("aaaaaaaaaa");
+      var [myHand, cards] = appendOneCard(myHand, cards);
+      var [opponentHand, cards] = appendOneCard(opponentHand, cards);
+    } else {
+      // console.log("adsfasdf");
+    }
+  };
+
+  const alert = submitted ? <Alert variant={variant}>{alertText}</Alert> : null;
+
+  var cards = started ? (
+    <div>
+      <div className="opponent-hand">{oppHandComp}</div>
+      <div className="my-hand">
+        {myHandComp}
+        <ButtonToolbar>
+          <ToggleButtonGroup type="radio" name="options" defaultValue={2}>
+            {toggleButton(1, "Fold")}
+            {toggleButton(2, "Call")}
+            {toggleButton(3, "Raise")}
+            {counter}
+          </ToggleButtonGroup>
+        </ButtonToolbar>
+        <Form noValidate>
+          <Button className="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Form>
+        {alert}
+      </div>
+    </div>
+  ) : (
+    <button onClick={() => setStarted(true)}>Start</button>
+  );
+
+  return <React.Fragment>{cards}</React.Fragment>;
+};
 
 export { Deck };
