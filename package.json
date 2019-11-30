@@ -4,7 +4,9 @@
   "description": "An online Poker App",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
+
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,17 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "lodash": "^4.17.15",
     "react": "^16.12.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
