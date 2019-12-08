@@ -1,5 +1,5 @@
-import { RandomCards } from "../../src/scripts/cardsRating";
-import { getCards, appendOneCard } from "../../src/scripts/cardsRating";
+import { RandomCards } from "../../scripts/cardsRating";
+import { getCards, appendOneCard } from "../../scripts/game";
 import { START_GAME, ADD_CARD } from "../actions/actions";
 
 const initialState = {
