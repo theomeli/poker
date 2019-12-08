@@ -2,7 +2,7 @@ import {
   RandomCards,
   deepFreeze,
   Suits,
-  SuitMapping,
+  // SuitMapping,
   Ranks,
   RankMapping,
   Cards,
@@ -36,11 +36,11 @@ test("Check deepFreeze function for an array", () => {
   expect(t).toThrow(TypeError);
 });
 
-test("Check SuitMapping", () => {
-  const result = SuitMapping[Suits[0]];
-  console.log(result);
-  expect(result).toEqual("︎︎♣︎");
-});
+// test("Check SuitMapping", () => {
+//   const result = SuitMapping[Suits[0]];
+//   console.log(result);
+//   expect(result).toEqual("︎︎♣︎");
+// });
 
 test("Check RankMapping", () => {
   const result = RankMapping[Ranks[12]];
@@ -93,7 +93,10 @@ test("Check RateableCards constructor", () => {
   const rateableCards = new RateableCards(cards);
   expect(rateableCards.ranks).toEqual({
     6: [{ suit: "clubs", rank: 6 }],
-    4: [{ suit: "clubs", rank: 4 }, { suit: "spades", rank: 4 }],
+    4: [
+      { suit: "clubs", rank: 4 },
+      { suit: "spades", rank: 4 }
+    ],
     3: [{ suit: "clubs", rank: 3 }],
     8: [{ suit: "diamonds", rank: 8 }]
   });
@@ -112,7 +115,12 @@ test("Check RateableCards constructor", () => {
       [{ suit: "clubs", rank: 6 }],
       [{ suit: "diamonds", rank: 8 }]
     ],
-    2: [[{ suit: "clubs", rank: 4 }, { suit: "spades", rank: 4 }]]
+    2: [
+      [
+        { suit: "clubs", rank: 4 },
+        { suit: "spades", rank: 4 }
+      ]
+    ]
   });
   expect(rateableCards.suitTimes).toEqual({
     1: [[{ rank: 4, suit: "spades" }], [{ rank: 8, suit: "diamonds" }]],

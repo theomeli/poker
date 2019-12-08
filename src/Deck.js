@@ -13,20 +13,39 @@ import {
   Alert
 } from "react-bootstrap";
 
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 
-const Deck = () => {
+const Deck = props => {
   const [started, setStarted] = useState(false);
 
   const [selectedButton, setButton] = useState(2);
 
-  const oppHandComp = opponentHand.map(card => (
-    <Card card={card} isClosed={true} />
+  const oppHandComp = opponentHand.map((card, idx) => (
+    <Card card={card} isClosed={true} key={`oppCard-${idx}`} />
   ));
-  const myHandComp = myHand.map(card => <Card card={card} isClosed={false} />);
+  const myHandComp = myHand.map((card, idx) => (
+    <Card card={card} isClosed={false} key={`myCard-${idx}`} />
+  ));
+
+  // const buttonMapping = {
+  //   1: "fold",
+  //   2: "call",
+  //   3: "raise"
+  // };
 
   const handleChangebutton = e => {
     setButton(e.target.getAttribute("value"));
+
+    // console.log('selectedButton')
+    // console.log(selectedButton)
+    // const option = buttonMapping[selectedButton];
+
+    // console.log("im here");
+    // console.log(option);
+
+    // props.onDispatch({ type: option });
+    // // console.log(props.option);
   };
 
   const counter =
@@ -63,17 +82,20 @@ const Deck = () => {
   const [variant, setVariant] = useState("");
   const [alertText, setAlertText] = useState("");
 
-  console.log(selectedButton);
+  // console.log(selectedButton);
 
-  const handleSubmit = e => {
+  const handleSubmit = (myHand, cards) => {
     setSubmitted(true);
     if (selectedButton === "1") {
       setVariant("danger");
       setAlertText("You have selected Fold. You lost your money");
     } else if (selectedButton === "2") {
-      console.log("aaaaaaaaaa");
-      var [myHand, cards] = appendOneCard(myHand, cards);
-      var [opponentHand, cards] = appendOneCard(opponentHand, cards);
+      // console.log("aaaaaaaaaa");
+      // console.log(myHand);
+      // console.log(cards);
+      // var [myHand, cards] = appendOneCard(myHand, cards);
+      // var [opponentHand, cards] = appendOneCard(opponentHand, cards);
+      this.props.appendOneCard();
     } else {
       // console.log("adsfasdf");
     }
@@ -95,7 +117,7 @@ const Deck = () => {
           </ToggleButtonGroup>
         </ButtonToolbar>
         <Form noValidate>
-          <Button className="submit" onClick={handleSubmit}>
+          <Button className="submit" onClick={handleSubmit.bind(myHand, cards)}>
             Submit
           </Button>
         </Form>
@@ -107,6 +129,11 @@ const Deck = () => {
   );
 
   return <React.Fragment>{cards}</React.Fragment>;
+};
+
+Deck.propTypes = {
+  option: PropTypes.object.isRequired,
+  onDispatch: PropTypes.func.isRequired
 };
 
 export { Deck };

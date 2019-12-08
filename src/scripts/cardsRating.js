@@ -16,12 +16,12 @@ const deepFreeze = object => {
 
 const Suits = Object.freeze(["♠︎", "♥︎", "♦︎", "♣︎"]);
 
-const SuitMapping = Object.freeze({
-  Spades: "S",
-  Hearts: "H",
-  Diamonds: "D",
-  Clubs: "C"
-});
+// const SuitMapping = Object.freeze({
+//   Spades: "S",
+//   Hearts: "H",
+//   Diamonds: "D",
+//   Clubs: "C"
+// });
 
 const Ranks = Object.freeze([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
 
@@ -124,7 +124,7 @@ export {
   RandomCards,
   deepFreeze,
   Suits,
-  SuitMapping,
+  // SuitMapping,
   Ranks,
   RankMapping,
   Cards,

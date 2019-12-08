@@ -25,3 +25,6 @@ yarn-error.log*
 package-lock.json
 
 .vscode
+*.code-workspace
+
+src/__snapshots__/

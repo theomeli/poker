@@ -4,40 +4,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Deck } from "./Deck";
 
-// const translate = (el, x, y) =>
-//   (el.style.transform = `translate(${x}%, ${y}%)`);
-// const { from } = AnimationFrames;
+const initialState = { option: "call" };
 
-// const hello = document.createElement("h1");
+const reducer = (state, action) => {
+  console.log("action");
+  console.log(action);
 
-// // const hello = React.createElement("h1", {}, "Hello World");
+  switch (action.type) {
+    case "fold":
+      return { option: "fold" };
+    case "call":
+      return { option: "call" };
+    case "raise":
+      return { option: "raise" };
+    default:
+      throw new Error();
+  }
+};
 
-// const animation = new AnimationFrames({
-//   delay: 0,
-//   duration: 1000,
-//   oninit() {
-//     console.log(hello);
-//     hello.style.display = "none";
-//   },
-//   onstart() {
-//     hello.style.display = "";
-//   },
-//   onprogress(e) {
-//     translate(hello, from(-100, e), 0);
-//   },
-//   onend() {
-//     hello.style.transform = "";
-//   }
-// });
+const App = () => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
-// hello.textContent = "Hello world!";
-
-function App() {
   return (
     <div>
-      <Deck />
+      <Deck option={state.option} onDispatch={dispatch} />
     </div>
   );
-}
+};
 
 export default App;
