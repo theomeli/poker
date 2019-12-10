@@ -1,6 +1,10 @@
 import { Card } from "./Card";
-import { Cards } from "./scripts/cardsRating";
-import { myHand, opponentHand, cards, appendOneCard } from "./scripts/game";
+import {
+  appendOneCardAction,
+  pushFold,
+  pushCall,
+  pushRaise
+} from "./redux/actions/actions";
 
 import {
   ToggleButtonGroup,
@@ -13,6 +17,7 @@ import {
   Alert
 } from "react-bootstrap";
 
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
@@ -21,31 +26,18 @@ const Deck = props => {
 
   const [selectedButton, setButton] = useState(2);
 
-  const oppHandComp = opponentHand.map((card, idx) => (
+  console.log("props");
+  console.log(props);
+
+  const oppHandComp = props.cards.opponentHand.map((card, idx) => (
     <Card card={card} isClosed={true} key={`oppCard-${idx}`} />
   ));
-  const myHandComp = myHand.map((card, idx) => (
+  const myHandComp = props.cards.myHand.map((card, idx) => (
     <Card card={card} isClosed={false} key={`myCard-${idx}`} />
   ));
 
-  // const buttonMapping = {
-  //   1: "fold",
-  //   2: "call",
-  //   3: "raise"
-  // };
-
   const handleChangebutton = e => {
     setButton(e.target.getAttribute("value"));
-
-    // console.log('selectedButton')
-    // console.log(selectedButton)
-    // const option = buttonMapping[selectedButton];
-
-    // console.log("im here");
-    // console.log(option);
-
-    // props.onDispatch({ type: option });
-    // // console.log(props.option);
   };
 
   const counter =
@@ -65,9 +57,6 @@ const Deck = props => {
       </div>
     ) : null;
 
-  // redux in app.js
-  //dispatch in game.js for changing the cards
-
   var toggleButton = (value, text) => (
     <ToggleButton
       variant="secondary"
@@ -82,20 +71,13 @@ const Deck = props => {
   const [variant, setVariant] = useState("");
   const [alertText, setAlertText] = useState("");
 
-  // console.log(selectedButton);
-
   const handleSubmit = (myHand, cards) => {
     setSubmitted(true);
     if (selectedButton === "1") {
       setVariant("danger");
       setAlertText("You have selected Fold. You lost your money");
     } else if (selectedButton === "2") {
-      // console.log("aaaaaaaaaa");
-      // console.log(myHand);
-      // console.log(cards);
-      // var [myHand, cards] = appendOneCard(myHand, cards);
-      // var [opponentHand, cards] = appendOneCard(opponentHand, cards);
-      this.props.appendOneCard();
+      props.appendOneCardAction();
     } else {
       // console.log("adsfasdf");
     }
@@ -117,7 +99,10 @@ const Deck = props => {
           </ToggleButtonGroup>
         </ButtonToolbar>
         <Form noValidate>
-          <Button className="submit" onClick={handleSubmit.bind(myHand, cards)}>
+          <Button
+            className="submit"
+            onClick={handleSubmit.bind(props.cards.myHand, props.cards.cards)}
+          >
             Submit
           </Button>
         </Form>
@@ -128,12 +113,28 @@ const Deck = props => {
     <button onClick={() => setStarted(true)}>Start</button>
   );
 
-  return <React.Fragment>{cards}</React.Fragment>;
+  return <>{cards}</>;
 };
 
-Deck.propTypes = {
-  option: PropTypes.object.isRequired,
-  onDispatch: PropTypes.func.isRequired
+// Deck.propTypes = {
+//   option: PropTypes.object.isRequired,
+//   onDispatch: PropTypes.func.isRequired
+// };
+
+// export { Deck };
+
+const mapStateToProps = state => {
+  return {
+    option: state.option,
+    cards: state.cards,
+    myHand: state.myHand,
+    opponentHand: state.opponentHand
+  };
 };
 
-export { Deck };
+export default connect(mapStateToProps, {
+  appendOneCardAction: appendOneCardAction,
+  fold: pushFold,
+  call: pushCall,
+  raise: pushRaise
+})(Deck);

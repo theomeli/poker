@@ -1,6 +1,9 @@
 import { createStore } from "redux";
 import rootReducer from "../reducers/reducers";
 
+console.log("rootReducer");
+console.log(rootReducer);
+
 export default createStore(
   rootReducer,
   undefined,

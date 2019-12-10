@@ -1,35 +1,39 @@
-import { RandomCards } from "../../scripts/cardsRating";
-import { getCards, appendOneCard } from "../../scripts/game";
-import { START_GAME, ADD_CARD } from "../actions/actions";
+// import { myHand, opponentHand } from "../../scripts/cardsRating";
+// import { START_GAME, APPEND_ONE_CARD } from "../actions/actions";
+import pushOptionButton from "./pushOptionButton";
+import appendOneCard from "./appendOneCard";
 
-const initialState = {
-  cards: RandomCards,
-  myHand: null,
-  opponentHand: null
-};
+import { combineReducers } from "redux";
 
-function rootReducer(state = initialState, action) {
-  var myHand, opponentHand, cards, restCards;
-  switch (action.type) {
-    case START_GAME:
-      [myHand, cards] = getCards(state.cards, 3);
-      [opponentHand, restCards] = getCards(cards, 3);
-      return {
-        cards: restCards,
-        myHand: myHand,
-        opponentHand: opponentHand
-      };
-    case ADD_CARD:
-      [myHand, cards] = appendOneCard(state.myHand, state.cards);
-      [opponentHand, cards] = appendOneCard(state.opponentHand, cards);
-      return {
-        cards: restCards,
-        myHand: myHand,
-        opponentHand: opponentHand
-      };
-    default:
-      return state;
-  }
-}
+const reducers = combineReducers({
+  option: pushOptionButton,
+  cards: appendOneCard
+});
 
-export default rootReducer;
+export default reducers;
+
+// function rootReducer(state = initialState, action) {
+//   var myHand, opponentHand, cards, restCards;
+//   switch (action.type) {
+//     case START_GAME:
+//       [myHand, cards] = getCards(state.cards, 3);
+//       [opponentHand, restCards] = getCards(cards, 3);
+//       return {
+//         cards: restCards,
+//         myHand: myHand,
+//         opponentHand: opponentHand
+//       };
+//     case APPEND_ONE_CARD:
+//       [myHand, cards] = appendOneCard(state.myHand, state.cards);
+//       [opponentHand, restCards] = appendOneCard(state.opponentHand, cards);
+//       return {
+//         cards: restCards,
+//         myHand: myHand,
+//         opponentHand: opponentHand
+//       };
+//     default:
+//       return state;
+//   }
+// }
+
+// export default rootReducer;
