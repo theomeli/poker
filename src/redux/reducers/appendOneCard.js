@@ -1,5 +1,5 @@
 import { START_GAME, APPEND_ONE_CARD } from "../actions/actions";
-import { getCards } from "../../scripts/game";
+import { getCards, appendOneCard } from "../../scripts/game";
 import { RandomCards } from "../../scripts/cardsRating";
 
 const [myHand, cards] = getCards(RandomCards, 3);
@@ -11,7 +11,7 @@ const initialState = {
   opponentHand: opponentHand
 };
 
-function appendOneCard(state = initialState, action) {
+function appendOneCardReducer(state = initialState, action) {
   var myHand, opponentHand, cards, restCards;
   switch (action.type) {
     case START_GAME:
@@ -35,4 +35,4 @@ function appendOneCard(state = initialState, action) {
   }
 }
 
-export default appendOneCard;
+export default appendOneCardReducer;

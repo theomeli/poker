@@ -26,9 +26,6 @@ const Deck = props => {
 
   const [selectedButton, setButton] = useState(2);
 
-  console.log("props");
-  console.log(props);
-
   const oppHandComp = props.cards.opponentHand.map((card, idx) => (
     <Card card={card} isClosed={true} key={`oppCard-${idx}`} />
   ));
