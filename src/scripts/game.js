@@ -1,9 +1,4 @@
-import {
-  deepFreeze,
-  // RandomCards,
-  RankMapping
-  // SuitMapping
-} from "./cardsRating";
+import { deepFreeze, RankMapping } from "./cardsRating";
 
 const getCards = (cards, n) => {
   var handCards = cards.slice(0, 3);
@@ -27,15 +22,7 @@ const appendOneCard = (cards, allCards) => {
 
   const restOfTheCards = allCards.slice(1);
 
-  console.log("clonedCards");
-  console.log(clonedCards);
-  console.log("restOfTheCards");
-  console.log(restOfTheCards);
-
   return [clonedCards, restOfTheCards];
 };
-
-// var [myHand, cards] = getCards(RandomCards, 3);
-// var [opponentHand, cards] = getCards(cards, 3);
 
 export { appendOneCard, getCards };

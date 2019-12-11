@@ -118,6 +118,20 @@ const PokerRating = {
 const PokerHandRate = hand =>
   Object.entries(PokerRating).find(([, is]) => is(hand))[0];
 
+// To be tested
+const NumRating = {
+  HighCard: 1,
+  OnePair: 2,
+  TwoPairs: 3,
+  ThreeOfAKind: 4,
+  Straight: 5,
+  Flush: 6,
+  FullHouse: 7,
+  FourOfAKind: 8,
+  StraightFlush: 9,
+  RoyalFlush: 10
+};
+
 // TODO: use export default
 
 export {
@@ -131,5 +145,6 @@ export {
   maxInOrder,
   RateableCards,
   PokerRating,
-  PokerHandRate
+  PokerHandRate,
+  NumRating
 };

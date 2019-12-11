@@ -14,14 +14,14 @@ const initialState = {
 function appendOneCardReducer(state = initialState, action) {
   var myHand, opponentHand, cards, restCards;
   switch (action.type) {
-    case START_GAME:
-      [myHand, cards] = getCards(state.cards, 3);
-      [opponentHand, restCards] = getCards(cards, 3);
-      return {
-        cards: restCards,
-        myHand: myHand,
-        opponentHand: opponentHand
-      };
+    // case START_GAME:
+    //   [myHand, cards] = getCards(state.cards, 3);
+    //   [opponentHand, restCards] = getCards(cards, 3);
+    //   return {
+    //     cards: restCards,
+    //     myHand: myHand,
+    //     opponentHand: opponentHand
+    //   };
     case APPEND_ONE_CARD:
       [myHand, cards] = appendOneCard(state.myHand, state.cards);
       [opponentHand, restCards] = appendOneCard(state.opponentHand, cards);

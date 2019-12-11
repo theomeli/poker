@@ -1,4 +1,5 @@
 import { Card } from "./Card";
+import { PokerHandRate, NumRating, RateableCards } from "./scripts/cardsRating";
 import {
   appendOneCardAction,
   pushFold,
@@ -26,8 +27,23 @@ const Deck = props => {
 
   const [selectedButton, setButton] = useState(2);
 
+  var isClosed = props.cards.opponentHand.length === 5 ? false : true;
+
+  var finishText = null;
+  if (!isClosed) {
+    const myHandRateable = new RateableCards(props.cards.myHand);
+    const oppHandRateable = new RateableCards(props.cards.opponentHand);
+    console.log(PokerHandRate(myHandRateable));
+
+    finishText =
+      NumRating[PokerHandRate(myHandRateable)] >
+      NumRating[PokerHandRate(oppHandRateable)]
+        ? "You won"
+        : "You lost";
+  }
+
   const oppHandComp = props.cards.opponentHand.map((card, idx) => (
-    <Card card={card} isClosed={true} key={`oppCard-${idx}`} />
+    <Card card={card} isClosed={isClosed} key={`oppCard-${idx}`} />
   ));
   const myHandComp = props.cards.myHand.map((card, idx) => (
     <Card card={card} isClosed={false} key={`myCard-${idx}`} />
@@ -85,6 +101,7 @@ const Deck = props => {
   var cards = started ? (
     <div>
       <div className="opponent-hand">{oppHandComp}</div>
+      {finishText != null && <h1>{finishText}</h1>}
       <div className="my-hand">
         {myHandComp}
         <ButtonToolbar>

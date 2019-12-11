@@ -1,5 +1,3 @@
-// import { myHand, opponentHand } from "../../scripts/cardsRating";
-// import { START_GAME, APPEND_ONE_CARD } from "../actions/actions";
 import pushOptionButton from "./pushOptionButton";
 import appendOneCard from "./appendOneCard";
 
