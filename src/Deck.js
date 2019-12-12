@@ -1,4 +1,4 @@
-import { Card } from "./Card";
+import MyCard from "./Card";
 import { PokerHandRate, NumRating, RateableCards } from "./scripts/cardsRating";
 import {
   appendOneCardAction,
@@ -15,7 +15,8 @@ import {
   Form,
   FormControl,
   InputGroup,
-  Alert
+  Alert,
+  Card
 } from "react-bootstrap";
 
 import { connect } from "react-redux";
@@ -24,18 +25,17 @@ import React, { useState } from "react";
 
 const Deck = props => {
   const [started, setStarted] = useState(false);
-
   const [selectedButton, setButton] = useState(2);
+  const [submitted, setSubmitted] = useState(false);
 
   var isClosed = props.cards.opponentHand.length === 5 ? false : true;
 
-  var finishText = null;
+  var resultText = null;
   if (!isClosed) {
     const myHandRateable = new RateableCards(props.cards.myHand);
     const oppHandRateable = new RateableCards(props.cards.opponentHand);
-    console.log(PokerHandRate(myHandRateable));
 
-    finishText =
+    resultText =
       NumRating[PokerHandRate(myHandRateable)] >
       NumRating[PokerHandRate(oppHandRateable)]
         ? "You won"
@@ -43,10 +43,10 @@ const Deck = props => {
   }
 
   const oppHandComp = props.cards.opponentHand.map((card, idx) => (
-    <Card card={card} isClosed={isClosed} key={`oppCard-${idx}`} />
+    <MyCard card={card} isClosed={isClosed} key={`oppCard-${idx}`} />
   ));
   const myHandComp = props.cards.myHand.map((card, idx) => (
-    <Card card={card} isClosed={false} key={`myCard-${idx}`} />
+    <MyCard card={card} isClosed={false} key={`myCard-${idx}`} />
   ));
 
   const handleChangebutton = e => {
@@ -80,15 +80,9 @@ const Deck = props => {
     </ToggleButton>
   );
 
-  const [submitted, setSubmitted] = useState(false);
-  const [variant, setVariant] = useState("");
-  const [alertText, setAlertText] = useState("");
-
-  const handleSubmit = (myHand, cards) => {
-    setSubmitted(true);
+  const handleSubmit = () => {
     if (selectedButton === "1") {
-      setVariant("danger");
-      setAlertText("You have selected Fold. You lost your money");
+      setSubmitted(true);
     } else if (selectedButton === "2") {
       props.appendOneCardAction();
     } else {
@@ -96,12 +90,14 @@ const Deck = props => {
     }
   };
 
-  const alert = submitted ? <Alert variant={variant}>{alertText}</Alert> : null;
+  const alert = submitted ? (
+    <Alert variant="danger">You have selected Fold. You lost your money</Alert>
+  ) : null;
 
   var cards = started ? (
     <div>
       <div className="opponent-hand">{oppHandComp}</div>
-      {finishText != null && <h1>{finishText}</h1>}
+      {resultText != null && <h1>{resultText}</h1>}
       <div className="my-hand">
         {myHandComp}
         <ButtonToolbar>
@@ -122,6 +118,20 @@ const Deck = props => {
         </Form>
         {alert}
       </div>
+
+      {/* <div style={{ display: table-cell, vertical-align: middle, height: 550px;}}> */}
+      <div class="bootstrap-card">
+        <Card bg="secondary" text="white" style={{ width: "18rem" }}>
+          <Card.Header>Amount</Card.Header>
+          <Card.Body>
+            <Card.Title>50$</Card.Title>
+            {/* <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text> */}
+          </Card.Body>
+        </Card>
+      </div>
     </div>
   ) : (
     <button onClick={() => setStarted(true)}>Start</button>
@@ -130,12 +140,10 @@ const Deck = props => {
   return <>{cards}</>;
 };
 
-// Deck.propTypes = {
-//   option: PropTypes.object.isRequired,
-//   onDispatch: PropTypes.func.isRequired
-// };
-
-// export { Deck };
+Deck.propTypes = {
+  cards: PropTypes.object.isRequired,
+  appendOneCardAction: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
   return {

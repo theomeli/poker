@@ -1,10 +1,10 @@
-import { deepFreeze, RankMapping } from "./cardsRating";
+import { deepFreeze } from "./cardsRating";
 
 const getCards = (cards, n) => {
   var handCards = cards.slice(0, 3);
   handCards = deepFreeze(
     handCards.map(c => {
-      return { rank: RankMapping[c.rank], suit: c.suit };
+      return { rank: c.rank, suit: c.suit };
     })
   );
   const restOfTheCards = cards.slice(3);
@@ -14,7 +14,7 @@ const getCards = (cards, n) => {
 const appendOneCard = (cards, allCards) => {
   const aCard = allCards.slice(0, 1);
   aCard.map(c => {
-    return { rank: RankMapping[c.rank], suit: c.suit };
+    return { rank: c.rank, suit: c.suit };
   });
 
   const clonedCards = cards.map(a => ({ ...a }));

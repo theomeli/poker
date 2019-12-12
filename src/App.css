@@ -3,17 +3,20 @@ body {
   font-family: sans-serif;
 }
 
-.card {
+.my-card {
   display: inline-block;
   position: relative;
-  width: 5em;
-  height: 7em;
+  /* width: 5em;
+  height: 7em; */
+
+  width: 7.5em;
+  height: 10.5em;
   background-color: #ffffff;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
   border-radius: 0.25em;
 }
 
-.card.red {
+.my-card.red {
   color: red;
 }
 
@@ -40,7 +43,7 @@ body {
 
 .card-suits {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   width: 17.5%;
   height: 25%;
@@ -87,4 +90,8 @@ img {
 .input-raise {
   padding-left: 20px;
   display: flex;
+}
+
+.bootstrap-card {
+  float: right;
 }

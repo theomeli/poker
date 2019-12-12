@@ -138,7 +138,6 @@ export {
   RandomCards,
   deepFreeze,
   Suits,
-  // SuitMapping,
   Ranks,
   RankMapping,
   Cards,
