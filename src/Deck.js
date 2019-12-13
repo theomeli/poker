@@ -120,11 +120,11 @@ const Deck = props => {
       </div>
 
       {/* <div style={{ display: table-cell, vertical-align: middle, height: 550px;}}> */}
-      <div class="bootstrap-card">
+      <div className="bootstrap-card">
         <Card bg="secondary" text="white" style={{ width: "18rem" }}>
-          <Card.Header>Amount</Card.Header>
+          <Card.Header>Bet Amount</Card.Header>
           <Card.Body>
-            <Card.Title>50$</Card.Title>
+            <Card.Text>50$</Card.Text>
             {/* <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
