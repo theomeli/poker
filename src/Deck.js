@@ -1,4 +1,6 @@
 import MyCard from "./Card";
+import BetAmount from "./BetAmount";
+import ButtonsSection from "./ButtonsSection";
 import { PokerHandRate, NumRating, RateableCards } from "./scripts/cardsRating";
 import {
   appendOneCardAction,
@@ -7,17 +9,7 @@ import {
   pushRaise
 } from "./redux/actions/actions";
 
-import {
-  ToggleButtonGroup,
-  ToggleButton,
-  Button,
-  ButtonToolbar,
-  Form,
-  FormControl,
-  InputGroup,
-  Alert,
-  Card
-} from "react-bootstrap";
+import { ToggleButton, Alert } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -49,26 +41,13 @@ const Deck = props => {
     <MyCard card={card} isClosed={false} key={`myCard-${idx}`} />
   ));
 
+  const alert = submitted ? (
+    <Alert variant="danger">You have selected Fold. You lost your money</Alert>
+  ) : null;
+
   const handleChangebutton = e => {
     setButton(e.target.getAttribute("value"));
   };
-
-  const counter =
-    selectedButton === "3" ? (
-      <div className="input-raise">
-        {/* <Button variant="secondary">-</Button> */}
-        <InputGroup className="mb-1">
-          <InputGroup.Prepend>
-            <InputGroup.Text>$</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl aria-label="Amount (to the nearest dollar)" />
-          <InputGroup.Append>
-            <InputGroup.Text>.00</InputGroup.Text>
-          </InputGroup.Append>
-        </InputGroup>
-        {/* <Button variant="secondary">+</Button> */}
-      </div>
-    ) : null;
 
   var toggleButton = (value, text) => (
     <ToggleButton
@@ -90,48 +69,21 @@ const Deck = props => {
     }
   };
 
-  const alert = submitted ? (
-    <Alert variant="danger">You have selected Fold. You lost your money</Alert>
-  ) : null;
-
   var cards = started ? (
     <div>
       <div className="opponent-hand">{oppHandComp}</div>
       {resultText != null && <h1>{resultText}</h1>}
       <div className="my-hand">
         {myHandComp}
-        <ButtonToolbar>
-          <ToggleButtonGroup type="radio" name="options" defaultValue={2}>
-            {toggleButton(1, "Fold")}
-            {toggleButton(2, "Call")}
-            {toggleButton(3, "Raise")}
-            {counter}
-          </ToggleButtonGroup>
-        </ButtonToolbar>
-        <Form noValidate>
-          <Button
-            className="submit"
-            onClick={handleSubmit.bind(props.cards.myHand, props.cards.cards)}
-          >
-            Submit
-          </Button>
-        </Form>
+        <ButtonsSection
+          toggleButton={toggleButton}
+          selectedButton={selectedButton}
+          handleSubmit={handleSubmit}
+          cards={props.cards}
+        />
         {alert}
       </div>
-
-      {/* <div style={{ display: table-cell, vertical-align: middle, height: 550px;}}> */}
-      <div className="bootstrap-card">
-        <Card bg="secondary" text="white" style={{ width: "18rem" }}>
-          <Card.Header>Bet Amount</Card.Header>
-          <Card.Body>
-            <Card.Text>50$</Card.Text>
-            {/* <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text> */}
-          </Card.Body>
-        </Card>
-      </div>
+      {BetAmount}
     </div>
   ) : (
     <button onClick={() => setStarted(true)}>Start</button>
@@ -142,6 +94,7 @@ const Deck = props => {
 
 Deck.propTypes = {
   cards: PropTypes.object.isRequired,
+  option: PropTypes.object.isRequired,
   appendOneCardAction: PropTypes.func.isRequired
 };
 
@@ -156,6 +109,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   appendOneCardAction: appendOneCardAction,
+  // pushOptionButton: pushOptionButton
   fold: pushFold,
   call: pushCall,
   raise: pushRaise
