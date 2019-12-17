@@ -1,21 +1,25 @@
 import { FOLD, CALL, RAISE } from "../actions/actions";
 
-function pushOptionButton(option = "2", action) {
+const initialState = {
+  option: CALL
+};
+
+function pushOptionButton(state = initialState, action) {
   switch (action.type) {
     case FOLD:
       return {
-        option: "1"
+        option: FOLD
       };
     case CALL:
       return {
-        option: "2"
+        option: CALL
       };
     case RAISE:
       return {
-        option: "3"
+        option: RAISE
       };
     default:
-      return option;
+      return state;
   }
 }
 

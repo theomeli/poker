@@ -33,6 +33,7 @@ const ButtonSections = props => (
 ButtonSections.propTypes = {
   toggleButton: PropTypes.func.isRequired,
   selectedButton: PropTypes.string.isRequired,
+  // selectedButton: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   cards: PropTypes.object.isRequired
 };

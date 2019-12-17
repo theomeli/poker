@@ -4,9 +4,9 @@ import ButtonsSection from "./ButtonsSection";
 import { PokerHandRate, NumRating, RateableCards } from "./scripts/cardsRating";
 import {
   appendOneCardAction,
-  pushFold,
-  pushCall,
-  pushRaise
+  optionAction,
+  isSubmitted,
+  isNotSubmitted
 } from "./redux/actions/actions";
 
 import { ToggleButton, Alert } from "react-bootstrap";
@@ -17,8 +17,6 @@ import React, { useState } from "react";
 
 const Deck = props => {
   const [started, setStarted] = useState(false);
-  const [selectedButton, setButton] = useState(2);
-  const [submitted, setSubmitted] = useState(false);
 
   var isClosed = props.cards.opponentHand.length === 5 ? false : true;
 
@@ -41,12 +39,16 @@ const Deck = props => {
     <MyCard card={card} isClosed={false} key={`myCard-${idx}`} />
   ));
 
-  const alert = submitted ? (
-    <Alert variant="danger">You have selected Fold. You lost your money</Alert>
-  ) : null;
+  const alert =
+    props.submitted.submitted && props.option === "1" ? (
+      <Alert variant="danger">
+        You have selected Fold. You lost your money
+      </Alert>
+    ) : null;
 
+  // TODO: make it simpler, use the reducer
   const handleChangebutton = e => {
-    setButton(e.target.getAttribute("value"));
+    props.optionAction(e.target.getAttribute("value"));
   };
 
   var toggleButton = (value, text) => (
@@ -59,12 +61,12 @@ const Deck = props => {
     </ToggleButton>
   );
 
+  // TODO: make option string instead of object
   const handleSubmit = () => {
-    if (selectedButton === "1") {
-      setSubmitted(true);
-    } else if (selectedButton === "2") {
+    props.isSubmitted();
+    if (props.option === "2") {
       props.appendOneCardAction();
-    } else {
+    } else if (props.option === "3") {
       // console.log("adsfasdf");
     }
   };
@@ -77,7 +79,7 @@ const Deck = props => {
         {myHandComp}
         <ButtonsSection
           toggleButton={toggleButton}
-          selectedButton={selectedButton}
+          selectedButton={props.option}
           handleSubmit={handleSubmit}
           cards={props.cards}
         />
@@ -94,23 +96,27 @@ const Deck = props => {
 
 Deck.propTypes = {
   cards: PropTypes.object.isRequired,
-  option: PropTypes.object.isRequired,
-  appendOneCardAction: PropTypes.func.isRequired
+  option: PropTypes.string.isRequired,
+  optionAction: PropTypes.func.isRequired,
+  appendOneCardAction: PropTypes.func.isRequired,
+  submitted: PropTypes.object.isRequired,
+  isSubmitted: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
+  // TODO: remove dublicated attributes
   return {
-    option: state.option,
+    option: state.option.option,
     cards: state.cards,
-    myHand: state.myHand,
-    opponentHand: state.opponentHand
+    submitted: state.submitted
   };
 };
 
-export default connect(mapStateToProps, {
-  appendOneCardAction: appendOneCardAction,
-  // pushOptionButton: pushOptionButton
-  fold: pushFold,
-  call: pushCall,
-  raise: pushRaise
-})(Deck);
+const mapDispatchToProprs = {
+  appendOneCardAction,
+  optionAction,
+  isSubmitted,
+  isNotSubmitted
+};
+
+export default connect(mapStateToProps, mapDispatchToProprs)(Deck);
