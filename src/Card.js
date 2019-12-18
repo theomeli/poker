@@ -14,7 +14,7 @@ function Card(props) {
   const colorClass =
     suit === "♥︎" || suit === "♦︎" ? "my-card red" : "my-card black";
 
-  if (!props.isClosed) {
+  if (!props.closed) {
     return (
       <div className={colorClass}>
         <div className="card-suits">
@@ -41,7 +41,7 @@ function Card(props) {
 
 Card.propTypes = {
   card: PropTypes.object.isRequired,
-  isClosed: PropTypes.bool.isRequired
+  closed: PropTypes.bool.isRequired
 };
 
 export default Card;

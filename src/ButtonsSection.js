@@ -20,10 +20,7 @@ const ButtonSections = props => (
       </ToggleButtonGroup>
     </ButtonToolbar>
     <Form noValidate>
-      <Button
-        className="submit"
-        onClick={props.handleSubmit.bind(props.cards.myHand, props.cards.cards)}
-      >
+      <Button className="submit" onClick={props.handleSubmit}>
         Submit
       </Button>
     </Form>

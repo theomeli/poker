@@ -1,8 +1,10 @@
+import { RAISE } from "./redux/actions/actions";
+
 import { FormControl, InputGroup } from "react-bootstrap";
 import React from "react";
 
 const RaiseAmount = selectedButton =>
-  selectedButton === "3" ? (
+  selectedButton === RAISE ? (
     <div className="input-raise">
       {/* <Button variant="secondary">-</Button> */}
       <InputGroup className="mb-1">

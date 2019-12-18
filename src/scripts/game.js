@@ -1,13 +1,13 @@
 import { deepFreeze } from "./cardsRating";
 
 const getCards = (cards, n) => {
-  var handCards = cards.slice(0, 3);
+  var handCards = cards.slice(0, n);
   handCards = deepFreeze(
     handCards.map(c => {
       return { rank: c.rank, suit: c.suit };
     })
   );
-  const restOfTheCards = cards.slice(3);
+  const restOfTheCards = cards.slice(n);
   return [handCards, restOfTheCards];
 };
 

@@ -3,10 +3,14 @@ import BetAmount from "./BetAmount";
 import ButtonsSection from "./ButtonsSection";
 import { PokerHandRate, NumRating, RateableCards } from "./scripts/cardsRating";
 import {
-  appendOneCardAction,
+  appendOneCard,
   optionAction,
+  FOLD,
+  CALL,
+  RAISE,
   isSubmitted,
-  isNotSubmitted
+  isNotSubmitted,
+  setAmount
 } from "./redux/actions/actions";
 
 import { ToggleButton, Alert } from "react-bootstrap";
@@ -18,38 +22,57 @@ import React, { useState } from "react";
 const Deck = props => {
   const [started, setStarted] = useState(false);
 
-  var isClosed = props.cards.opponentHand.length === 5 ? false : true;
+  const handleChangebutton = e => {
+    props.optionAction(e.target.getAttribute("value"));
+  };
 
-  var resultText = null;
-  if (!isClosed) {
-    const myHandRateable = new RateableCards(props.cards.myHand);
-    const oppHandRateable = new RateableCards(props.cards.opponentHand);
+  // TODO: make option string instead of object
+  const handleSubmit = () => {
+    props.isSubmitted();
+    if (props.option === CALL) {
+      props.appendOneCard();
+    } else if (props.option === RAISE) {
+      var value = document.getElementsByClassName("form-control")[0].value;
+      // TODO: remove dublicated attributes
+      props.setAmount(
+        (parseInt(props.betAmount.betAmount) + 2 * parseInt(value)).toString()
+      );
+      props.appendOneCard();
+    }
+  };
 
-    resultText =
-      NumRating[PokerHandRate(myHandRateable)] >
-      NumRating[PokerHandRate(oppHandRateable)]
+  var cardsClosed = props.cards.opponentHand.length === 5 ? false : true;
+
+  const result = cardsClosed => {
+    if (!cardsClosed) {
+      const myHandRateable = new RateableCards(props.cards.myHand);
+      const oppHandRateable = new RateableCards(props.cards.opponentHand);
+
+      return NumRating[PokerHandRate(myHandRateable)] >
+        NumRating[PokerHandRate(oppHandRateable)]
         ? "You won"
         : "You lost";
-  }
+    }
+    return null;
+  };
+  const resultText = result(cardsClosed);
+
+  console.log("resultText");
+  console.log(resultText);
 
   const oppHandComp = props.cards.opponentHand.map((card, idx) => (
-    <MyCard card={card} isClosed={isClosed} key={`oppCard-${idx}`} />
+    <MyCard card={card} closed={cardsClosed} key={`oppCard-${idx}`} />
   ));
   const myHandComp = props.cards.myHand.map((card, idx) => (
-    <MyCard card={card} isClosed={false} key={`myCard-${idx}`} />
+    <MyCard card={card} closed={false} key={`myCard-${idx}`} />
   ));
 
-  const alert =
-    props.submitted.submitted && props.option === "1" ? (
+  const foldMsg =
+    props.submitted.submitted && props.option === FOLD ? (
       <Alert variant="danger">
         You have selected Fold. You lost your money
       </Alert>
     ) : null;
-
-  // TODO: make it simpler, use the reducer
-  const handleChangebutton = e => {
-    props.optionAction(e.target.getAttribute("value"));
-  };
 
   var toggleButton = (value, text) => (
     <ToggleButton
@@ -61,20 +84,10 @@ const Deck = props => {
     </ToggleButton>
   );
 
-  // TODO: make option string instead of object
-  const handleSubmit = () => {
-    props.isSubmitted();
-    if (props.option === "2") {
-      props.appendOneCardAction();
-    } else if (props.option === "3") {
-      // console.log("adsfasdf");
-    }
-  };
-
   var cards = started ? (
     <div>
       <div className="opponent-hand">{oppHandComp}</div>
-      {resultText != null && <h1>{resultText}</h1>}
+      {resultText != null && <h1 className="result">{resultText}</h1>}
       <div className="my-hand">
         {myHandComp}
         <ButtonsSection
@@ -83,9 +96,9 @@ const Deck = props => {
           handleSubmit={handleSubmit}
           cards={props.cards}
         />
-        {alert}
+        {foldMsg}
       </div>
-      {BetAmount}
+      <BetAmount betAmount={props.betAmount} />
     </div>
   ) : (
     <button onClick={() => setStarted(true)}>Start</button>
@@ -98,9 +111,11 @@ Deck.propTypes = {
   cards: PropTypes.object.isRequired,
   option: PropTypes.string.isRequired,
   optionAction: PropTypes.func.isRequired,
-  appendOneCardAction: PropTypes.func.isRequired,
+  appendOneCard: PropTypes.func.isRequired,
   submitted: PropTypes.object.isRequired,
-  isSubmitted: PropTypes.func.isRequired
+  isSubmitted: PropTypes.func.isRequired,
+  setAmount: PropTypes.func.isRequired,
+  betAmount: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
@@ -108,15 +123,17 @@ const mapStateToProps = state => {
   return {
     option: state.option.option,
     cards: state.cards,
-    submitted: state.submitted
+    submitted: state.submitted,
+    betAmount: state.betAmount
   };
 };
 
 const mapDispatchToProprs = {
-  appendOneCardAction,
+  appendOneCard,
   optionAction,
   isSubmitted,
-  isNotSubmitted
+  isNotSubmitted,
+  setAmount
 };
 
 export default connect(mapStateToProps, mapDispatchToProprs)(Deck);

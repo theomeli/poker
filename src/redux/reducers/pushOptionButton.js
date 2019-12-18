@@ -4,7 +4,7 @@ const initialState = {
   option: CALL
 };
 
-function pushOptionButton(state = initialState, action) {
+function option(state = initialState, action) {
   switch (action.type) {
     case FOLD:
       return {
@@ -23,4 +23,4 @@ function pushOptionButton(state = initialState, action) {
   }
 }
 
-export default pushOptionButton;
+export default option;

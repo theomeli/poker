@@ -1,13 +1,10 @@
-import pushOptionButton from "./pushOptionButton";
-import appendOneCard from "./appendOneCard";
+import option from "./pushOptionButton";
+import cards from "./appendOneCard";
 import submitted from "./submitted";
+import betAmount from "./betAmount";
 
 import { combineReducers } from "redux";
 
-const reducers = combineReducers({
-  option: pushOptionButton,
-  cards: appendOneCard,
-  submitted
-});
+const reducers = combineReducers({ option, cards, submitted, betAmount });
 
 export default reducers;
