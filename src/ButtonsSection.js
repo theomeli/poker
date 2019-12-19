@@ -4,6 +4,7 @@ import { ToggleButtonGroup, ButtonToolbar } from "react-bootstrap";
 import PropTypes from "prop-types";
 import React from "react";
 
+// TODO: split RaiseAmount from ButtonToolbar
 const ButtonSections = props => (
   <>
     <ButtonToolbar>

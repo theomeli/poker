@@ -6,7 +6,6 @@ import React from "react";
 const RaiseAmount = selectedButton =>
   selectedButton === RAISE ? (
     <div className="input-raise">
-      {/* <Button variant="secondary">-</Button> */}
       <InputGroup className="mb-1">
         <InputGroup.Prepend>
           <InputGroup.Text>$</InputGroup.Text>
@@ -16,7 +15,6 @@ const RaiseAmount = selectedButton =>
           <InputGroup.Text>.00</InputGroup.Text>
         </InputGroup.Append>
       </InputGroup>
-      {/* <Button variant="secondary">+</Button> */}
     </div>
   ) : null;
 
