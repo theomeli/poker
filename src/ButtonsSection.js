@@ -1,11 +1,6 @@
 import RaiseAmount from "./RaiseAmount";
 
-import {
-  ToggleButtonGroup,
-  Button,
-  ButtonToolbar,
-  Form
-} from "react-bootstrap";
+import { ToggleButtonGroup, ButtonToolbar } from "react-bootstrap";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -19,18 +14,12 @@ const ButtonSections = props => (
         {RaiseAmount(props.selectedButton)}
       </ToggleButtonGroup>
     </ButtonToolbar>
-    <Form noValidate>
-      <Button className="submit" onClick={props.handleSubmit}>
-        Submit
-      </Button>
-    </Form>
   </>
 );
 
 ButtonSections.propTypes = {
   toggleButton: PropTypes.func.isRequired,
   selectedButton: PropTypes.string.isRequired,
-  // selectedButton: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   cards: PropTypes.object.isRequired
 };

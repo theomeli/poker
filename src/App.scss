@@ -6,9 +6,6 @@ body {
 .my-card {
   display: inline-block;
   position: relative;
-  /* width: 5em;
-  height: 7em; */
-
   width: 7.5em;
   height: 10.5em;
   background-color: #ffffff;
@@ -64,30 +61,24 @@ img {
   max-height: 100%;
 }
 
-%cards-posiion {
+%cards-position {
   left: 35%;
   position: absolute;
 }
 
 .opponent-hand {
   @extend %cards-position;
-  /* left: 35%; */
   top: 20%;
-  /* position: absolute; */
 }
 
 .my-hand {
   @extend %cards-position;
-  /* left: 35%; */
-  /* position: absolute; */
   display: inline;
   bottom: 20%;
 }
 
 .buttons-section {
   @extend %cards-position;
-  /* left: 35%; */
-  /* position: absolute; */
   display: inline;
   bottom: 10%;
 }

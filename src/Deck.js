@@ -13,7 +13,7 @@ import {
   setAmount
 } from "./redux/actions/actions";
 
-import { ToggleButton, Alert } from "react-bootstrap";
+import { ToggleButton, Alert, Form, Button } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -26,7 +26,6 @@ const Deck = props => {
     props.optionAction(e.target.getAttribute("value"));
   };
 
-  // TODO: make option string instead of object
   const handleSubmit = () => {
     props.isSubmitted();
     if (props.option === CALL) {
@@ -57,9 +56,6 @@ const Deck = props => {
   };
   const resultText = result(cardsClosed);
 
-  console.log("resultText");
-  console.log(resultText);
-
   const oppHandComp = props.cards.opponentHand.map((card, idx) => (
     <MyCard card={card} closed={cardsClosed} key={`oppCard-${idx}`} />
   ));
@@ -69,9 +65,11 @@ const Deck = props => {
 
   const foldMsg =
     props.submitted.submitted && props.option === FOLD ? (
-      <Alert variant="danger">
-        You have selected Fold. You lost your money
-      </Alert>
+      <div className="fold-msg">
+        <Alert variant="danger">
+          You have selected Fold. You lost your money
+        </Alert>
+      </div>
     ) : null;
 
   var toggleButton = (value, text) => (
@@ -88,16 +86,20 @@ const Deck = props => {
     <div>
       <div className="opponent-hand">{oppHandComp}</div>
       {resultText != null && <h1 className="result">{resultText}</h1>}
-      <div className="my-hand">
-        {myHandComp}
+      <div className="my-hand">{myHandComp}</div>
+      <div className="buttons-section">
         <ButtonsSection
           toggleButton={toggleButton}
           selectedButton={props.option}
-          handleSubmit={handleSubmit}
           cards={props.cards}
         />
-        {foldMsg}
+        <Form noValidate>
+          <Button className="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Form>
       </div>
+      {foldMsg}
       <BetAmount betAmount={props.betAmount} />
     </div>
   ) : (

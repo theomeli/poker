@@ -7,7 +7,6 @@ const createSuit = suit => position => {
 
   return (
     <div className={`card-suit${mirroredClass}`} style={style}>
-      {/* <div className="card-suit" style={style}> */}
       {suit}
     </div>
   );
