@@ -18,11 +18,9 @@ import { ToggleButton, Alert, Form, Button } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React from "react";
 
 const Deck = props => {
-  const [started, setStarted] = useState(false);
-
   const handleChangebutton = e => {
     props.optionAction(e.target.getAttribute("value"));
   };
@@ -83,7 +81,7 @@ const Deck = props => {
     </ToggleButton>
   );
 
-  var cards = started ? (
+  return (
     <div>
       <div className={styles["opponent-hand"]}>{oppHandComp}</div>
       {resultText != null && <h1 className={styles["result"]}>{resultText}</h1>}
@@ -103,11 +101,7 @@ const Deck = props => {
       {foldMsg}
       <BetAmount betAmount={props.betAmount} />
     </div>
-  ) : (
-    <button onClick={() => setStarted(true)}>Start</button>
   );
-
-  return <>{cards}</>;
 };
 
 Deck.propTypes = {
@@ -115,7 +109,7 @@ Deck.propTypes = {
   option: PropTypes.string.isRequired,
   optionAction: PropTypes.func.isRequired,
   appendOneCard: PropTypes.func.isRequired,
-  submitted: PropTypes.object.isRequired,
+  submitted: PropTypes.bool.isRequired,
   isSubmitted: PropTypes.func.isRequired,
   setAmount: PropTypes.func.isRequired,
   betAmount: PropTypes.object.isRequired
@@ -126,7 +120,7 @@ const mapStateToProps = state => {
   return {
     option: state.option.option,
     cards: state.cards,
-    submitted: state.submitted,
+    submitted: state.optionSubmitted.submitted,
     betAmount: state.betAmount
   };
 };

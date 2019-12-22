@@ -4,7 +4,10 @@ const initialState = {
   submitted: NOT_SUBMITTED
 };
 
-function submitted(state = initialState, action) {
+function optionSubmitted(state = initialState, action) {
+  // console.log("action");
+  // console.log(action);
+
   switch (action.type) {
     case SUBMITTED:
       return {
@@ -19,4 +22,4 @@ function submitted(state = initialState, action) {
   }
 }
 
-export default submitted;
+export default optionSubmitted;
