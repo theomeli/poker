@@ -2,7 +2,7 @@ import { suitPositions } from "./suitPositions";
 import { Ranks, RankMapping } from "./scripts/cardsRating";
 import { createSuit } from "./Suit";
 import back from "./back.png";
-import styles from "./card.module.scss";
+import styles from "./Card.module.scss";
 
 import PropTypes from "prop-types";
 import React from "react";
