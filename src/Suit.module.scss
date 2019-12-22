@@ -1,0 +1,8 @@
+.card-suit {
+  font-size: 1em;
+  position: absolute;
+}
+
+.card-suit.mirrored {
+  transform: rotate(180deg);
+}

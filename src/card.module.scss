@@ -1,14 +1,6 @@
-body {
-  background-color: green;
-  font-family: sans-serif;
-}
-
 .my-card {
   display: inline-block;
   position: relative;
-  /* width: 5em;
-  height: 7em; */
-
   width: 7.5em;
   height: 10.5em;
   background-color: #ffffff;
@@ -62,61 +54,4 @@ body {
 img {
   max-width: 100%;
   max-height: 100%;
-}
-
-%cards-posiion {
-  left: 35%;
-  position: absolute;
-}
-
-.opponent-hand {
-  @extend %cards-position;
-  /* left: 35%; */
-  top: 20%;
-  /* position: absolute; */
-}
-
-.my-hand {
-  @extend %cards-position;
-  /* left: 35%; */
-  /* position: absolute; */
-  display: inline;
-  bottom: 20%;
-}
-
-.buttons-section {
-  @extend %cards-position;
-  /* left: 35%; */
-  /* position: absolute; */
-  display: inline;
-  bottom: 10%;
-}
-
-.decision {
-  margin-left: 10%;
-}
-
-.submit {
-  display: block;
-  margin-top: 3%;
-  margin-left: 20%;
-}
-
-.input-raise {
-  padding-left: 20px;
-  display: flex;
-}
-
-.bootstrap-card {
-  float: right;
-}
-
-.result {
-  display: inline;
-}
-
-.fold-msg {
-  top: 93%;
-  position: absolute;
-  right: 0%;
 }

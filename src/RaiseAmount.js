@@ -1,3 +1,4 @@
+import styles from "./RaiseAmount.module.scss";
 import { RAISE } from "./redux/actions/actions";
 
 import { FormControl, InputGroup } from "react-bootstrap";
@@ -5,7 +6,7 @@ import React from "react";
 
 const RaiseAmount = selectedButton =>
   selectedButton === RAISE ? (
-    <div className="input-raise">
+    <div className={styles["input-raise"]}>
       <InputGroup className="mb-1">
         <InputGroup.Prepend>
           <InputGroup.Text>$</InputGroup.Text>

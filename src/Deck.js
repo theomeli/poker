@@ -1,5 +1,6 @@
 import MyCard from "./Card";
 import BetAmount from "./BetAmount";
+import styles from "./Deck.module.scss";
 import ButtonsSection from "./ButtonsSection";
 import { PokerHandRate, NumRating, RateableCards } from "./scripts/cardsRating";
 import {
@@ -65,7 +66,7 @@ const Deck = props => {
 
   const foldMsg =
     props.submitted.submitted && props.option === FOLD ? (
-      <div className="fold-msg">
+      <div className={styles["fold-msg"]}>
         <Alert variant="danger">
           You have selected Fold. You lost your money
         </Alert>
@@ -84,17 +85,17 @@ const Deck = props => {
 
   var cards = started ? (
     <div>
-      <div className="opponent-hand">{oppHandComp}</div>
-      {resultText != null && <h1 className="result">{resultText}</h1>}
-      <div className="my-hand">{myHandComp}</div>
-      <div className="buttons-section">
+      <div className={styles["opponent-hand"]}>{oppHandComp}</div>
+      {resultText != null && <h1 className={styles["result"]}>{resultText}</h1>}
+      <div className={styles["my-hand"]}>{myHandComp}</div>
+      <div className={styles["buttons-section"]}>
         <ButtonsSection
           toggleButton={toggleButton}
           selectedButton={props.option}
           cards={props.cards}
         />
         <Form noValidate>
-          <Button className="submit" onClick={handleSubmit}>
+          <Button className={styles["submit"]} onClick={handleSubmit}>
             Submit
           </Button>
         </Form>

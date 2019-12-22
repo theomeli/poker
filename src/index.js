@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import styles from "./index.module.css";
 import App from "./App";
 import store from "./redux/store/store";
 import * as serviceWorker from "./serviceWorker";
@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App className={styles} />
   </Provider>,
   document.getElementById("root")
 );
