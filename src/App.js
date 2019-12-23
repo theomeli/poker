@@ -23,9 +23,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDipatchToProps = {
+const mapDispatchToProps = {
   startGame,
   notStartGame
 };
 
-export default connect(mapStateToProps, mapDipatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

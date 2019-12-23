@@ -65,7 +65,8 @@ const Deck = props => {
   ));
 
   const foldMsg =
-    props.submitted.submitted && props.option === FOLD ? (
+    props.submitted !== "isNotSubmitted" && props.option === FOLD ? (
+      // props.submitted && props.option === FOLD ? (
       <div className={styles["fold-msg"]}>
         <Alert variant="danger">
           You have selected Fold. You lost your money

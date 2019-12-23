@@ -1,21 +1,20 @@
-// export const START_GAME = "START_GAME";
 export const APPEND_ONE_CARD = "APPEND_ONE_CARD";
 
 export const FOLD = "1";
 export const CALL = "2";
 export const RAISE = "3";
 
-export const SUBMITTED = true;
-export const NOT_SUBMITTED = false;
+// TODO: check why in the case of having true and false values
+// when starting the game (action {type: true}) alse foldSubmitted
+// state is affected
+// is not recommended to use boolean values?
+export const SUBMITTED = "isSubmitted";
+export const NOT_SUBMITTED = "isNotSubmitted";
 
 export const BET_AMOUNT = "50";
 
 export const GAME_STARTED = true;
 export const GAME_NOT_STARTED = false;
-
-// export function startGame() {
-//   return { type: START_GAME };
-// }
 
 export function appendOneCard() {
   return { type: APPEND_ONE_CARD };
