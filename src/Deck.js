@@ -9,8 +9,8 @@ import {
   FOLD,
   CALL,
   RAISE,
-  isSubmitted,
-  isNotSubmitted,
+  foldSubmitted,
+  foldNotSubmitted,
   setAmount
 } from "./redux/actions/actions";
 
@@ -26,10 +26,12 @@ const Deck = props => {
   };
 
   const handleSubmit = () => {
-    props.isSubmitted();
-    if (props.option === CALL) {
+    if (props.option === FOLD) {
+      props.foldSubmitted();
+    } else if (props.option === CALL) {
       props.appendOneCard();
     } else if (props.option === RAISE) {
+      // props.foldNotSubmitted();
       var value = document.getElementsByClassName("form-control")[0].value;
       // TODO: remove dublicated attributes
       props.setAmount(
@@ -39,10 +41,10 @@ const Deck = props => {
     }
   };
 
-  var cardsClosed = props.cards.opponentHand.length === 5 ? false : true;
+  var gameEnded = props.cards.opponentHand.length === 5;
 
-  const result = cardsClosed => {
-    if (!cardsClosed) {
+  const result = gameEnded => {
+    if (gameEnded) {
       const myHandRateable = new RateableCards(props.cards.myHand);
       const oppHandRateable = new RateableCards(props.cards.opponentHand);
 
@@ -53,10 +55,10 @@ const Deck = props => {
     }
     return null;
   };
-  const resultText = result(cardsClosed);
+  const resultText = result(gameEnded);
 
   const oppHandComp = props.cards.opponentHand.map((card, idx) => (
-    <MyCard card={card} closed={cardsClosed} key={`oppCard-${idx}`} />
+    <MyCard card={card} closed={!gameEnded} key={`oppCard-${idx}`} />
   ));
   const myHandComp = props.cards.myHand.map((card, idx) => (
     <MyCard card={card} closed={false} key={`myCard-${idx}`} />
@@ -93,7 +95,11 @@ const Deck = props => {
           cards={props.cards}
         />
         <Form noValidate>
-          <Button className={styles["submit"]} onClick={handleSubmit}>
+          <Button
+            className={styles["submit"]}
+            onClick={handleSubmit}
+            disabled={gameEnded | (foldMsg != null)}
+          >
             Submit
           </Button>
         </Form>
@@ -110,7 +116,8 @@ Deck.propTypes = {
   optionAction: PropTypes.func.isRequired,
   appendOneCard: PropTypes.func.isRequired,
   submitted: PropTypes.bool.isRequired,
-  isSubmitted: PropTypes.func.isRequired,
+  foldSubmitted: PropTypes.func.isRequired,
+  foldNotSubmitted: PropTypes.func.isRequired,
   setAmount: PropTypes.func.isRequired,
   betAmount: PropTypes.object.isRequired
 };
@@ -120,7 +127,7 @@ const mapStateToProps = state => {
   return {
     option: state.option.option,
     cards: state.cards,
-    submitted: state.optionSubmitted.submitted,
+    submitted: state.foldIsSubmitted.submitted,
     betAmount: state.betAmount
   };
 };
@@ -128,8 +135,8 @@ const mapStateToProps = state => {
 const mapDispatchToProprs = {
   appendOneCard,
   optionAction,
-  isSubmitted,
-  isNotSubmitted,
+  foldSubmitted,
+  foldNotSubmitted,
   setAmount
 };
 

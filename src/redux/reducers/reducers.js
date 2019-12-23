@@ -1,15 +1,18 @@
 import option from "./pushOptionButton";
 import cards from "./appendOneCard";
-import optionSubmitted from "./optionSubmitted";
+import foldIsSubmitted from "./foldIsSubmitted";
 import betAmount from "./betAmount";
 import gameStarted from "./gameStarted";
 
 import { combineReducers } from "redux";
 
+console.log("foldIsSubmitted");
+console.log(foldIsSubmitted);
+
 const reducers = combineReducers({
   option,
   cards,
-  optionSubmitted,
+  foldIsSubmitted,
   betAmount,
   gameStarted
 });

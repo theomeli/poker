@@ -7,13 +7,7 @@ import React from "react";
 const StartButtons = props => {
   return (
     <div className={styles["start-buttons"]}>
-      <Button
-        variant="primary"
-        size="lg"
-        block
-        className={styles["submit"]}
-        onClick={props.onClick}
-      >
+      <Button variant="primary" size="lg" block onClick={props.onClick}>
         Start New Game
       </Button>
       <Button
@@ -21,7 +15,6 @@ const StartButtons = props => {
         size="lg"
         block
         disabled
-        className={styles["submit"]}
         onClick={props.onClick}
       >
         Start Multiplayer Game (Coming Soon)

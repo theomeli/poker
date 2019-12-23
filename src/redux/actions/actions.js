@@ -25,11 +25,11 @@ export function optionAction(option) {
   return { type: option };
 }
 
-export function isSubmitted() {
+export function foldSubmitted() {
   return { type: SUBMITTED };
 }
 
-export function isNotSubmitted() {
+export function foldNotSubmitted() {
   return { type: NOT_SUBMITTED };
 }
 
