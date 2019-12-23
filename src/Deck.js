@@ -10,7 +10,6 @@ import {
   CALL,
   RAISE,
   foldSubmitted,
-  foldNotSubmitted,
   setAmount
 } from "./redux/actions/actions";
 
@@ -31,7 +30,6 @@ const Deck = props => {
     } else if (props.option === CALL) {
       props.appendOneCard();
     } else if (props.option === RAISE) {
-      // props.foldNotSubmitted();
       var value = document.getElementsByClassName("form-control")[0].value;
       // TODO: remove dublicated attributes
       props.setAmount(
@@ -65,8 +63,8 @@ const Deck = props => {
   ));
 
   const foldMsg =
-    props.submitted !== "isNotSubmitted" && props.option === FOLD ? (
-      // props.submitted && props.option === FOLD ? (
+    props.submitted == "isSubmitted" ? (
+      // props.submitted ? (
       <div className={styles["fold-msg"]}>
         <Alert variant="danger">
           You have selected Fold. You lost your money
@@ -118,7 +116,6 @@ Deck.propTypes = {
   appendOneCard: PropTypes.func.isRequired,
   submitted: PropTypes.bool.isRequired,
   foldSubmitted: PropTypes.func.isRequired,
-  foldNotSubmitted: PropTypes.func.isRequired,
   setAmount: PropTypes.func.isRequired,
   betAmount: PropTypes.object.isRequired
 };
@@ -137,7 +134,6 @@ const mapDispatchToProprs = {
   appendOneCard,
   optionAction,
   foldSubmitted,
-  foldNotSubmitted,
   setAmount
 };
 
