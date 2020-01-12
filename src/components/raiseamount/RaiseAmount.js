@@ -1,5 +1,5 @@
 import styles from "./RaiseAmount.module.scss";
-import { RAISE } from "./redux/actions/actions";
+import { RAISE } from "../../redux/actions/actions";
 
 import { FormControl, InputGroup } from "react-bootstrap";
 import React from "react";

@@ -1,18 +1,18 @@
-import RaiseAmount from "./RaiseAmount";
+import RaiseAmount from "../raiseamount/RaiseAmount";
 
 import { ToggleButtonGroup, ButtonToolbar } from "react-bootstrap";
 import PropTypes from "prop-types";
 import React from "react";
 
 // TODO: split RaiseAmount from ButtonToolbar
-const ButtonSections = props => (
+const ButtonSections = ({ toggleButton, selectedButton }) => (
   <>
     <ButtonToolbar>
       <ToggleButtonGroup type="radio" name="options" defaultValue={2}>
-        {props.toggleButton(1, "Fold")}
-        {props.toggleButton(2, "Call")}
-        {props.toggleButton(3, "Raise")}
-        {RaiseAmount(props.selectedButton)}
+        {toggleButton(1, "Fold")}
+        {toggleButton(2, "Call")}
+        {toggleButton(3, "Raise")}
+        {RaiseAmount(selectedButton)}
       </ToggleButtonGroup>
     </ButtonToolbar>
   </>

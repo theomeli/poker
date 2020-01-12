@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import styles from "./index.module.css";
-import App from "./App";
-import store from "./redux/store/store";
-import * as serviceWorker from "./serviceWorker";
+import styles from "components/app/App.module.css";
+import App from "components/app/App";
+import store from "redux/store/store";
+import * as serviceWorker from "serviceWorker";
 
 import { Provider } from "react-redux";
 

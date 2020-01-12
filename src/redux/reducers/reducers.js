@@ -6,9 +6,6 @@ import gameStarted from "./gameStarted";
 
 import { combineReducers } from "redux";
 
-console.log("foldIsSubmitted");
-console.log(foldIsSubmitted);
-
 const reducers = combineReducers({
   option,
   cards,

@@ -1,11 +1,10 @@
-import StartButtons from "./StartButtons";
-import { startGame, notStartGame } from "./redux/actions/actions";
-
+import StartButtons from "../startbuttons/StartButtons";
+import { startGame, notStartGame } from "../../redux/actions/actions";
 import PropTypes from "prop-types";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Deck from "./Deck";
+import Deck from "../deck/Deck";
 import { connect } from "react-redux";
 
 const App = props => {

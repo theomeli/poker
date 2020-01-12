@@ -1,15 +1,15 @@
 import { suitPositions } from "./suitPositions";
-import { Ranks, RankMapping } from "./scripts/cardsRating";
-import { createSuit } from "./Suit";
+import { Ranks, RankMapping } from "../../scripts/cardsRating";
+import { createSuit } from "../suit/Suit";
 import back from "./back.png";
 import styles from "./Card.module.scss";
 
 import PropTypes from "prop-types";
 import React from "react";
 
-function Card(props) {
-  const rank = props.card.rank;
-  const suit = props.card.suit;
+const Card = ({ card, closed }) => {
+  const rank = card.rank;
+  const suit = card.suit;
   const mappedRank = RankMapping[rank];
 
   const colorClass =
@@ -17,7 +17,7 @@ function Card(props) {
       ? `${styles["my-card"]} ${styles["red"]}`
       : `${styles["my-card"]} ${styles["black"]}`;
 
-  if (!props.closed) {
+  if (!closed) {
     return (
       <div className={colorClass}>
         <div className={styles["card-suits"]}>
@@ -40,7 +40,7 @@ function Card(props) {
       <img src={back} alt="A Card" />
     </div>
   );
-}
+};
 
 Card.propTypes = {
   card: PropTypes.object.isRequired,
