@@ -6,7 +6,7 @@ import {
   PokerHandRate,
   NumRating,
   RateableCards
-} from "../../scripts/cardsRating";
+} from "../../libraries/cardsRating";
 import {
   appendOneCard,
   optionAction,

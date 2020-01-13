@@ -1,5 +1,5 @@
 import { suitPositions } from "./suitPositions";
-import { Ranks, RankMapping } from "../../scripts/cardsRating";
+import { Ranks, RankMapping } from "../../libraries/cardsRating";
 import { createSuit } from "../suit/Suit";
 import back from "./back.png";
 import styles from "./Card.module.scss";
