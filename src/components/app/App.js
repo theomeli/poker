@@ -1,14 +1,19 @@
 import StartButtons from "../startbuttons/StartButtons";
-import { startGame, notStartGame } from "../../redux/actions/actions";
+import ModelProvider from "./model-provider";
+
 import PropTypes from "prop-types";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Deck from "../deck/Deck";
-import { connect } from "react-redux";
+import Deck from "components/deck/Deck";
+// import { connect } from "react-redux";
 
-const App = props => {
-  return props.started ? <Deck /> : <StartButtons onClick={props.startGame} />;
+const App = ({ started, startGame }) => {
+  return (
+    <ModelProvider>
+      {started ? <Deck /> : <StartButtons onClick={startGame} />}
+    </ModelProvider>
+  );
 };
 
 App.propTypes = {
@@ -16,15 +21,17 @@ App.propTypes = {
   startGame: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
-  return {
-    started: state.gameStarted.started
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     started: state.gameStarted.started
+//   };
+// };
 
-const mapDispatchToProps = {
-  startGame,
-  notStartGame
-};
+// const mapDispatchToProps = {
+//   startGame,
+//   notStartGame
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default App;

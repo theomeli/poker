@@ -4,7 +4,7 @@ const initialState = {
   started: gameNotStarted.payload
 };
 
-function gameIsStarted(state = initialState, action) {
+const gameIsStarted = (state = initialState, action) => {
   switch (action.type) {
     case gameStarted.type:
       return {
@@ -17,6 +17,6 @@ function gameIsStarted(state = initialState, action) {
     default:
       return state;
   }
-}
+};
 
 export default gameIsStarted;

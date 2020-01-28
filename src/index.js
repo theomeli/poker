@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styles from "components/app/App.module.css";
 import App from "components/app/App";
-import store from "redux/store/store";
+// import store from "redux/store/store";
 import * as serviceWorker from "serviceWorker";
 
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App className={styles} />
-  </Provider>,
+  // <Provider store={store}>
+  <App className={styles} />,
+  // </Provider>,
   document.getElementById("root")
 );
 

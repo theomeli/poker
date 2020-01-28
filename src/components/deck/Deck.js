@@ -2,24 +2,20 @@ import MyCard from "../card/Card";
 import BetAmount from "../betamount/BetAmount";
 import styles from "./Deck.module.scss";
 import ButtonsSection from "../buttonssection/ButtonsSection";
-import {
-  PokerHandRate,
-  NumRating,
-  RateableCards
-} from "../../libraries/cardsRating";
-import {
-  appendOneCard,
-  optionAction,
-  FOLD,
-  CALL,
-  RAISE,
-  foldSubmitted,
-  setAmount
-} from "../../redux/actions/actions";
+import { PokerHandRate, NumRating, RateableCards } from "libraries/cardsRating";
+// import {
+//   appendOneCard,
+//   optionAction,
+//   FOLD,
+//   CALL,
+//   RAISE,
+//   foldSubmitted,
+//   setAmount
+// } from "../../redux/actions/actions";
 
 import { ToggleButton, Alert, Form, Button } from "react-bootstrap";
 
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -38,11 +34,11 @@ const Deck = ({
   };
 
   const handleSubmit = () => {
-    if (option === FOLD) {
+    if (option === "FOLD") {
       foldSubmitted();
-    } else if (option === CALL) {
+    } else if (option === "CALL") {
       appendOneCard();
-    } else if (option === RAISE) {
+    } else if (option === "RAISE") {
       var value = document.getElementsByClassName("form-control")[0].value;
       // TODO: remove dublicated attributes
       setAmount(
@@ -133,21 +129,22 @@ Deck.propTypes = {
   betAmount: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  // TODO: remove dublicated attributes
-  return {
-    option: state.option.option,
-    cards: state.cards,
-    submitted: state.foldIsSubmitted.submitted,
-    betAmount: state.betAmount
-  };
-};
+// const mapStateToProps = state => {
+//   // TODO: remove dublicated attributes
+//   return {
+//     option: state.option.option,
+//     cards: state.cards,
+//     submitted: state.foldIsSubmitted.submitted,
+//     betAmount: state.betAmount
+//   };
+// };
 
-const mapDispatchToProprs = {
-  appendOneCard,
-  optionAction,
-  foldSubmitted,
-  setAmount
-};
+// const mapDispatchToProprs = {
+//   appendOneCard,
+//   optionAction,
+//   foldSubmitted,
+//   setAmount
+// };
 
-export default connect(mapStateToProps, mapDispatchToProprs)(Deck);
+// export default connect(mapStateToProps, mapDispatchToProprs)(Deck);
+export default Deck;

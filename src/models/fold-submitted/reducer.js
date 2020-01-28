@@ -1,22 +1,22 @@
-import { foldSubmitted, foldNotSubmitted } from "./actions";
+import { foldIsSubmitted, foldIsNotSubmitted } from "./actions";
 
 const initialState = {
-  submitted: foldNotSubmitted.type
+  submitted: foldIsNotSubmitted.type
 };
 
-function foldIsSubmitted(state = initialState, action) {
+function foldSubmitted(state = initialState, action) {
   switch (action.type) {
-    case foldSubmitted.type:
+    case foldIsSubmitted.type:
       return {
-        submitted: foldSubmitted.payload
+        submitted: foldIsSubmitted.payload
       };
-    case foldNotSubmitted.type:
+    case foldIsNotSubmitted.type:
       return {
-        submitted: foldNotSubmitted.payload
+        submitted: foldIsNotSubmitted.payload
       };
     default:
       return state;
   }
 }
 
-export default foldIsSubmitted;
+export default foldSubmitted;

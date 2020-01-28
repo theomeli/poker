@@ -1,14 +1,19 @@
 import { useSelector, useDispatch } from "react-redux";
-import optionAnAction from "./actions";
+// import optionAnAction from "./actions";
+import { fold, call, raise } from "./actions";
 
 const useCardsModel = () => {
   const option = useSelector(({ option }) => option);
   const dispatch = useDispatch();
-  const optionAction = () => dispatch(optionAnAction());
+  const foldAction = () => dispatch(fold());
+  const callAction = () => dispatch(call());
+  const raiseAction = () => dispatch(raise());
 
   return {
     ...option,
-    optionAction
+    foldAction,
+    callAction,
+    raiseAction
   };
 };
 

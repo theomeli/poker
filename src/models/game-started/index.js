@@ -1,3 +1,4 @@
 import useGameStartedModel from "./useGameStartedModel";
+import reducer from "./reducer";
 
-export default useGameStartedModel;
+export { useGameStartedModel, reducer };

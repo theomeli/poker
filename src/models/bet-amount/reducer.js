@@ -1,4 +1,4 @@
-import { BET_AMOUNT } from "./actions";
+import setAmount from "./actions";
 
 const initialState = {
   betAmount: "50"
@@ -6,7 +6,7 @@ const initialState = {
 
 const setBetAmount = (state = initialState, action) => {
   switch (action.type) {
-    case BET_AMOUNT:
+    case setAmount.type:
       return { betAmount: action.amount };
     default:
       return state;

@@ -1,11 +1,11 @@
 const SUBMITTED = "isSubmitted";
 const NOT_SUBMITTED = "isNotSubmitted";
 
-const foldSubmitted = () => ({ type: SUBMITTED, payload: true });
+const foldIsSubmitted = () => ({ type: SUBMITTED, payload: true });
 
-const foldNotSubmitted = () => ({ type: NOT_SUBMITTED, payload: false });
+const foldIsNotSubmitted = () => ({ type: NOT_SUBMITTED, payload: false });
 
-foldSubmitted.type = SUBMITTED;
-foldNotSubmitted.type = NOT_SUBMITTED;
+foldIsSubmitted.type = SUBMITTED;
+foldIsNotSubmitted.type = NOT_SUBMITTED;
 
-export { foldSubmitted, foldNotSubmitted };
+export { foldIsSubmitted, foldIsNotSubmitted };

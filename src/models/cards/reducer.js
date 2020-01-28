@@ -1,4 +1,4 @@
-import { APPEND_ONE_CARD } from "./actions";
+import appendCard from "./actions";
 import { getCards, appendOneCard } from "libraries/game";
 import { RandomCards } from "libraries/cardsRating";
 
@@ -14,7 +14,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   var myHand, opponentHand, inCards, restCards;
   switch (action.type) {
-    case APPEND_ONE_CARD:
+    case appendCard.type:
       [myHand, inCards] = appendOneCard(state.myHand, state.cards);
       [opponentHand, restCards] = appendOneCard(state.opponentHand, inCards);
       return {

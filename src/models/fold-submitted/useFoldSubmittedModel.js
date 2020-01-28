@@ -1,10 +1,15 @@
-export const SUBMITTED = "isSubmitted";
-export const NOT_SUBMITTED = "isNotSubmitted";
+import { useSelector, useDispatch } from "react-redux";
+import { foldIsSubmitted } from "./actions";
 
-export function foldSubmitted() {
-  return { type: SUBMITTED };
-}
+const useFoldSubmittedModel = () => {
+  const submitted = useSelector({ submitted });
+  const dispatch = useDispatch();
+  const setFoldSubmitted = () => dispatch(foldIsSubmitted());
 
-export function foldNotSubmitted() {
-  return { type: NOT_SUBMITTED };
-}
+  return {
+    ...submitted,
+    setFoldSubmitted
+  };
+};
+
+export default useFoldSubmittedModel;
