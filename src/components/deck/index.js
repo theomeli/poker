@@ -1,4 +1,4 @@
 import Deck from "./Deck";
-import withDeckProps from "./withDeckProps";
+import WithDeckProps from "./WithDeckProps";
 
-export default withDeckProps(Deck);
+export default WithDeckProps(Deck);

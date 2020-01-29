@@ -9,6 +9,9 @@ import Deck from "components/deck/Deck";
 // import { connect } from "react-redux";
 
 const App = ({ started, startGame }) => {
+  console.log(started);
+  console.log(startGame);
+
   return (
     <ModelProvider>
       {started ? <Deck /> : <StartButtons onClick={startGame} />}

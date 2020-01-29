@@ -2,7 +2,7 @@ import useGameStartedModel from "models/game-started/useGameStartedModel";
 
 import React from "react";
 
-const withPropsApp = Component => {
+const WithPropsApp = Component => {
   const { started, startGame, notStartGame } = useGameStartedModel();
 
   return (
@@ -14,4 +14,4 @@ const withPropsApp = Component => {
   );
 };
 
-export default withPropsApp;
+export default WithPropsApp;

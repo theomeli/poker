@@ -1,4 +1,4 @@
-import withPropsApp from "withPropsApp";
-import App from "App";
+import WithPropsApp from "./WithPropsApp";
+import App from "./App";
 
-export default withPropsApp(App);
+export default WithPropsApp(App);

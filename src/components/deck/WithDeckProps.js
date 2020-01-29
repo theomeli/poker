@@ -2,7 +2,7 @@ import usePokerGameModel from "models/usePokerGameModel";
 
 import React from "react";
 
-const withDeckProps = Component => {
+const WithDeckProps = Component => {
   const {
     option,
     foldAction,
@@ -38,4 +38,4 @@ const withDeckProps = Component => {
   );
 };
 
-export default withDeckProps;
+export default WithDeckProps;
